@@ -18,7 +18,7 @@ namespace AS2ProjectTeam03
             public int credit_count { get; set; }
         }
 
-        public class USD
+        public class Currency
         {
             public double price { get; set; }
             public double volume_24h { get; set; }
@@ -31,7 +31,8 @@ namespace AS2ProjectTeam03
 
         public class Quote
         {
-            public USD USD { get; set; }
+            public Currency CAD { get; set; }
+            public Currency USD { get; set; }
         }
 
         public class Datum

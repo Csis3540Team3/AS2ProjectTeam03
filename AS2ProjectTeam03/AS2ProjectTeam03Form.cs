@@ -16,14 +16,16 @@ namespace AS2ProjectTeam03
     {
         public AS2ProjectTeam03Form()
         {
-            //run
             InitializeComponent();
 
-            // Get Initial Coin Data
+            //get initial coin data (from RestSharp)
             var coinRows = new InitializeData().GetCoinRows();
             //seed initial data into datagridview
             dataGridViewCoins.DataSource = coinRows;
-
+            //get portfolio value
+            double portfolioValue = 0.0;
+            //set portfolio label value
+            labelCurrentValue.Text = portfolioValue.ToString("C2");
         }
     }
 }
