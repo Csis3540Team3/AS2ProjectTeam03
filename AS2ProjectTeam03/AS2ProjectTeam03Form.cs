@@ -26,6 +26,13 @@ namespace AS2ProjectTeam03
             double portfolioValue = 0.0;
             //set portfolio label value
             labelCurrentValue.Text = portfolioValue.ToString("C2");
+            //get app width
+            int formWidth = this.Width;
+            //get combobox centre point x
+            int comboBoxPortfolioCentreX = (formWidth / 2) - (comboBoxPortfolio.Width / 2);
+            //center the combobox
+            comboBoxPortfolio.Location = new Point(comboBoxPortfolioCentreX, 8);
+            comboBoxPortfolio.SelectedItem="My Portfolio";
         }
     }
 }
