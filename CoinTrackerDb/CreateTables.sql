@@ -19,3 +19,7 @@ Create Table [Transaction] (
 	transactionPorfolio Int Foreign Key References Portfolio(portfolioId),
 	transactionCoin Int Foreign Key References Coin(coinId)
 )
+GO
+CREATE TABLE Quote (
+	quoteId Int Primary Key
+)
