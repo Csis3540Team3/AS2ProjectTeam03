@@ -30,7 +30,7 @@ namespace AS2ProjectTeam03
 
             IRestResponse responseFull = client.Execute(request);
             
-            Console.WriteLine(responseFull.Content);
+            //Console.WriteLine(responseFull.Content);
 
             return response.Data.data;
         }

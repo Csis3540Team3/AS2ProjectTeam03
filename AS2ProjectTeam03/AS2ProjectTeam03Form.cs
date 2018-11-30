@@ -20,6 +20,8 @@ namespace AS2ProjectTeam03
 
             //get initial coin data (from RestSharp)
             var coinRows = new InitializeData().GetCoinRows();
+            //test async request using System.HttpClient
+            Task<List<Datum>> x = WebApiRequest.GetApiAsync();
             //seed initial data into datagridview
             dataGridViewCoins.DataSource = coinRows;
             //get portfolio value
