@@ -23,14 +23,14 @@ namespace AS2ProjectTeam03
             request.AddParameter("convert", currency);
 
             IRestResponse<RootObject> response = client.Execute<RootObject>(request);
-            //foreach (Datum d in response.Data.data)
-            //{
-            //    Console.WriteLine($"{d.symbol} {d.max_supply}");
-            //}
+           //foreach (Datum d in response.Data.data)
+           //{
+           //   Console.WriteLine($"{d.symbol} {d.max_supply}");
+           //}
 
             IRestResponse responseFull = client.Execute(request);
             
-            //Console.WriteLine(responseFull.Content);
+           // Console.WriteLine(responseFull.Content);
 
             return response.Data.data;
         }

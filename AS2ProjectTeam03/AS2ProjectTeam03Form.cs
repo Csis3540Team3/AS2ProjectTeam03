@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AS2ProjectTeam03.EF_Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -35,6 +36,8 @@ namespace AS2ProjectTeam03
             //center the combobox
             comboBoxPortfolio.Location = new Point(comboBoxPortfolioCentreX, 8);
             comboBoxPortfolio.SelectedItem="My Portfolio";
+            //add new record test
+            Console.WriteLine(new AddNewRecord());
         }
     }
 }
