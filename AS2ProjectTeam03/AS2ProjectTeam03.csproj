@@ -76,12 +76,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InitialJsonString.cs" />
-    <Compile Include="NewPortfolioForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="NewPortfolioForm.Designer.cs">
-      <DependentUpon>NewPortfolioForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="WebApiRequest.cs" />
     <Compile Include="AddNewRecord.cs" />
     <Compile Include="AS2ProjectTeam03Form.cs">
@@ -101,9 +95,6 @@
     <Compile Include="XmlToDataGridView.cs" />
     <EmbeddedResource Include="AS2ProjectTeam03Form.resx">
       <DependentUpon>AS2ProjectTeam03Form.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NewPortfolioForm.resx">
-      <DependentUpon>NewPortfolioForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

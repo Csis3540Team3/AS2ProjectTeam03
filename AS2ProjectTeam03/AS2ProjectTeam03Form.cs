@@ -17,9 +17,13 @@ namespace AS2ProjectTeam03
 {
     public partial class AS2ProjectTeam03Form : Form
     {
+        private CoinTrackerEntities context;
         public AS2ProjectTeam03Form()
         {
             InitializeComponent();
+
+            context = new CoinTrackerEntities();
+
             //async request
             List<Datum> jsonList = WebRequest().Result;
             //initial data
@@ -56,11 +60,12 @@ namespace AS2ProjectTeam03
             dataGridViewCoins.Columns["CoinQuote"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridViewCoins.Columns["Coin24hr"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             //get app width
-            int formWidth = this.Width;
+            //int formWidth = this.Width;
             //get combobox centre point x
-            int comboBoxPortfolioCentreX = (formWidth / 2) - (comboBoxPortfolio.Width / 2);
+            //int comboBoxPortfolioCentreX = (formWidth / 2) - (comboBoxPortfolio.Width / 2);
             //center the combobox
-            comboBoxPortfolio.Location = new Point(comboBoxPortfolioCentreX, 8);
+            //comboBoxPortfolio.Location = new Point(comboBoxPortfolioCentreX, 8);
+            //Default Portfolio
             comboBoxPortfolio.SelectedItem = "All Coins";
         }
 
