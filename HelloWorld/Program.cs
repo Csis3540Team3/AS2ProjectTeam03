@@ -1,8 +1,10 @@
-﻿using System;
+﻿using AS2ProjectTeam03;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static AS2ProjectTeam03.DataTypes;
 
 namespace HelloWorld
 {

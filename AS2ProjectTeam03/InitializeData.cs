@@ -9,42 +9,22 @@ namespace AS2ProjectTeam03
 {
     public class InitializeData
     {
-        public List<CoinRow> GetCoinRows()
+        public List<CoinRow> GetCoinRows(List<Datum> initialData)
         {
-            string currentCurrency = "CAD";
             // calls a restful request to coinmarketcap api
-            List<Datum> initialData = new RestSharp().GetRestData(currentCurrency);
-            //declares the var coinRows outside the if... else statement
-            IEnumerable<CoinRow> coinRows;
-            //condicional for switching currencies
-            if (currentCurrency == "CAD")
-            {
-                coinRows =
-                    from data in initialData
-                    select new CoinRow
-                    {
-                        CoinId = data.id,
-                        CoinName = data.name,
-                        CoinSymbol = data.symbol,
-                        //CAD currency conversion
-                        CoinQuoteString = data.quote.CAD.price.ToString("C2"),
-                        Coin24hrString = (data.quote.CAD.percent_change_24h / 100).ToString("P2")
-                    };
-            }
-            else 
-            {
-                coinRows =
-                    from data in initialData
-                    select new CoinRow
-                    {
-                        CoinId = data.id,
-                        CoinName = data.name,
-                        CoinSymbol = data.symbol,
-                        //USD currency conversion
-                        CoinQuoteString = data.quote.USD.price.ToString("C2"),
-                        Coin24hrString = (data.quote.USD.percent_change_24h / 100).ToString("P2")
-                    };
-            }
+            //List<Datum> initialData = new RestSharp().GetRestData();
+            //List<Datum> initialData = new WebApiRequest().GetApiAsync().Result;
+            //declares the var coinRows and linq query for needed data
+            var coinRows = 
+                from data in initialData
+                select new CoinRow
+                {
+                    CoinId = data.id,
+                    CoinName = data.name,
+                    CoinSymbol = data.symbol,
+                    CoinQuote = data.quote.CAD.price,
+                    Coin24hr = (data.quote.CAD.percent_change_24h / 100)
+                };
             //returns a list to map to the gridview
             return coinRows.ToList();
         }

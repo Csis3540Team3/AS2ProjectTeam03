@@ -71,10 +71,9 @@ namespace AS2ProjectTeam03
             [DisplayName("Name")]
             public string CoinName { get; set; }
             [DisplayName("Quote")]
-            public string CoinQuoteString { get; set; }
-            //public double CoinQuote { get; set; }
+            public double CoinQuote { get; set; }
             [DisplayName("24hrs Change")]
-            public string Coin24hrString { get; set; }
+            public double Coin24hr { get; set; }
             //ToString override
             public override string ToString()
             {

@@ -5,8 +5,10 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using static AS2ProjectTeam03.DataTypes;
@@ -15,14 +17,16 @@ namespace AS2ProjectTeam03
 {
     public partial class AS2ProjectTeam03Form : Form
     {
+        List<Datum> jsonList = null;
         public AS2ProjectTeam03Form()
         {
             InitializeComponent();
-
-            //get initial coin data (from RestSharp)
-            var coinRows = new InitializeData().GetCoinRows();
-            //test async request using System.HttpClient
-            Task<List<Datum>> x = WebApiRequest.GetApiAsync();
+            //async request
+            WebRequest();
+            //deserialize string into a list
+            Console.WriteLine(jsonList[100].name);
+            //get initial coin data
+            List<CoinRow> coinRows = new InitializeData().GetCoinRows(jsonList);
             //seed initial data into datagridview
             dataGridViewCoins.DataSource = coinRows;
             //get portfolio value
@@ -37,7 +41,11 @@ namespace AS2ProjectTeam03
             comboBoxPortfolio.Location = new Point(comboBoxPortfolioCentreX, 8);
             comboBoxPortfolio.SelectedItem="My Portfolio";
             //add new record test
-            Console.WriteLine(new AddNewRecord());
+            //Console.WriteLine(new AddNewRecord());
+        }
+        public async void WebRequest()
+        {
+            jsonList = await WebApiRequest.AccessTheWebAsync();
         }
     }
 }
