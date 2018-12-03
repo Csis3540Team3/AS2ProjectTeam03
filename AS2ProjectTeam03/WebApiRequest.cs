@@ -33,7 +33,6 @@ namespace AS2ProjectTeam03
             //  - Control resumes here when getStringTask is complete.   
             //  - The await operator then retrieves the string result from getStringTask.  
             string urlContents = getStringTask.Result;
-            DoIndependentWork();
 
             // The return statement specifies an integer result.  
             // Any methods that are awaiting AccessTheWebAsync retrieve the length value.  

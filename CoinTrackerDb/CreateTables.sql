@@ -3,9 +3,6 @@ Create Table Coin (
 	coinId Int Primary Key Not Null,
 	coinName Varchar (20) Not Null,
 	coinSymbol Varchar (5) Not Null,
-	coinCurrency Varchar(3) Not Null,
-	coinCurrencyValue Float Not Null,
-	coin24HourChange Float Not Null,
 	coinMaxSupply Float
 )
 Go
@@ -21,5 +18,9 @@ Create Table [Transaction] (
 )
 GO
 CREATE TABLE Quote (
-	quoteId Int Primary Key
+	quoteId Int Primary Key Not Null,
+	quoteDateTime DateTime Not Null,
+	quoteVolume Float Not Null,
+	quotePrice Float Not Null,
+	quote24Hr Float Not Null,
 )

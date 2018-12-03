@@ -17,35 +17,82 @@ namespace AS2ProjectTeam03
 {
     public partial class AS2ProjectTeam03Form : Form
     {
-        List<Datum> jsonList = null;
         public AS2ProjectTeam03Form()
         {
             InitializeComponent();
             //async request
-            WebRequest();
-            //deserialize string into a list
-            Console.WriteLine(jsonList[100].name);
+            List<Datum> jsonList = WebRequest().Result;
+            //initial data
+            //JavaScriptSerializer js = new JavaScriptSerializer();
+            //RootObject rootObject = js.Deserialize<RootObject>(new InitialJson().InitialJsonString);
+            //List<Datum> initialJson = rootObject.data;
             //get initial coin data
             List<CoinRow> coinRows = new InitializeData().GetCoinRows(jsonList);
             //seed initial data into datagridview
             dataGridViewCoins.DataSource = coinRows;
+            //format datagridview
+            FormatDataGridView();
             //get portfolio value
             double portfolioValue = 0.0;
             //set portfolio label value
             labelCurrentValue.Text = portfolioValue.ToString("C2");
+            //add new record test
+            //Console.WriteLine(new AddNewRecord());
+        }
+        async Task<List<Datum>> WebRequest()
+        {
+            return await WebApiRequest.AccessTheWebAsync();
+        }
+        void FormatDataGridView()
+        {
+            //hide id column
+            dataGridViewCoins.Columns["CoinId"].Visible = false;
+            //format colums
+            dataGridViewCoins.Columns["CoinVolume24hr"].DefaultCellStyle.Format = "C0";
+            dataGridViewCoins.Columns["CoinQuote"].DefaultCellStyle.Format = "C2";
+            dataGridViewCoins.Columns["Coin24hr"].DefaultCellStyle.Format = "P2";
+            //right-align number columns
+            dataGridViewCoins.Columns["CoinVolume24hr"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCoins.Columns["CoinQuote"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCoins.Columns["Coin24hr"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             //get app width
             int formWidth = this.Width;
             //get combobox centre point x
             int comboBoxPortfolioCentreX = (formWidth / 2) - (comboBoxPortfolio.Width / 2);
             //center the combobox
             comboBoxPortfolio.Location = new Point(comboBoxPortfolioCentreX, 8);
-            comboBoxPortfolio.SelectedItem="My Portfolio";
-            //add new record test
-            //Console.WriteLine(new AddNewRecord());
+            comboBoxPortfolio.SelectedItem = "All Coins";
         }
-        public async void WebRequest()
+
+        private void comboBoxPortfolio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            jsonList = await WebApiRequest.AccessTheWebAsync();
+            Console.WriteLine(comboBoxPortfolio.SelectedIndex.ToString());
+            switch (comboBoxPortfolio.SelectedIndex)
+            {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                //case 3:
+                //    NewPortfolioForm newPortfolio = new NewPortfolioForm();
+                //    // Show newPortfolio as a modal dialog and determine if DialogResult = OK.
+                //    if (newPortfolio.ShowDialog(this) == DialogResult.OK)
+                //    {
+                //        // Read the contents of newPortfolio's TextBox.
+                //        this.comboBoxPortfolio.Text = newPortfolio.portfolioUserInput.Text;
+                //    }
+                //    else
+                //    {
+                //        this.comboBoxPortfolio.Text = "Cancelled";
+                //    }
+                //    newPortfolio.Dispose();
+                //    break;
+                default:
+                    Console.WriteLine(comboBoxPortfolio.SelectedIndex);
+                    break;
+            }
         }
     }
 }

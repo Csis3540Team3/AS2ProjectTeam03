@@ -15,13 +15,14 @@ namespace AS2ProjectTeam03
             //List<Datum> initialData = new RestSharp().GetRestData();
             //List<Datum> initialData = new WebApiRequest().GetApiAsync().Result;
             //declares the var coinRows and linq query for needed data
-            var coinRows = 
+            var coinRows =
                 from data in initialData
                 select new CoinRow
                 {
                     CoinId = data.id,
                     CoinName = data.name,
                     CoinSymbol = data.symbol,
+                    CoinVolume24hr = data.quote.CAD.volume_24h,
                     CoinQuote = data.quote.CAD.price,
                     Coin24hr = (data.quote.CAD.percent_change_24h / 100)
                 };

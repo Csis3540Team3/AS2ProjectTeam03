@@ -18,7 +18,7 @@ namespace AS2ProjectTeam03
             public int credit_count { get; set; }
         }
 
-        public class Currency
+        public class CAD
         {
             public double price { get; set; }
             public double volume_24h { get; set; }
@@ -31,8 +31,8 @@ namespace AS2ProjectTeam03
 
         public class Quote
         {
-            public Currency CAD { get; set; }
-            public Currency USD { get; set; }
+            public CAD CAD { get; set; }
+            //public Currency USD { get; set; }
         }
 
         public class Datum
@@ -64,12 +64,14 @@ namespace AS2ProjectTeam03
         /// </summary>
         public class CoinRow
         {
-            [DisplayName("Coin ID")]
+            //[DisplayName("Coin ID")]
             public int CoinId { get; set; }
             [DisplayName("Symbol")]
             public string CoinSymbol { get; set; }
             [DisplayName("Name")]
             public string CoinName { get; set; }
+            [DisplayName("24hrs Volume")]
+            public double CoinVolume24hr { get; set; }
             [DisplayName("Quote")]
             public double CoinQuote { get; set; }
             [DisplayName("24hrs Change")]
@@ -77,7 +79,7 @@ namespace AS2ProjectTeam03
             //ToString override
             public override string ToString()
             {
-                return $"CoinId: {CoinId}, CoinSymbol: {CoinSymbol}, CoinName: {CoinName}";
+                return $"CoinId: , CoinSymbol: {CoinSymbol}, CoinName: {CoinName}";
             }
         }
     }
