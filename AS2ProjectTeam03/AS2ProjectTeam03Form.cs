@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net.Http;
@@ -24,10 +25,9 @@ namespace AS2ProjectTeam03
             InitializeComponent();
             //setup EF dbset
             context = new CoinTrackerEntities();
-            //context.Database.Delete();
-            //context.Database.Create();
-            //context.SaveChanges();
-            //context.Coins.Load();
+
+            this.Load += AS2ProjectTream03Form_Load;
+
 
             //initial data
             JavaScriptSerializer js = new JavaScriptSerializer();
@@ -35,34 +35,6 @@ namespace AS2ProjectTeam03
             List<Datum> jsonList = rootObject.data;
             //get initial coin data
             List<CoinRow> coinRows = new InitializeData().GetCoinRows(jsonList);
-            //seed initial data into dbset
-            List<Coin> testCoinList = new List<Coin>()
-            {
-                new Coin {coinId = 1, coinName = "Bitcoin", coinSymbol="BTC", coinMaxSupply=21000000, },
-                new Coin {coinId = 2, coinName = "Ethereum", coinSymbol="ETH"},
-            };
-            context.Coins.AddRange(testCoinList);
-            context.SaveChanges();
-            List<Portfolio> testPortfolioList = new List<Portfolio>()
-            {
-                new Portfolio { portfolioId = 1, portfolioName = "Muh Test Portfolio"}
-            };
-            context.Portfolios.AddRange(testPortfolioList);
-            context.SaveChanges();
-            List<Quote> testQuoteList = new List<Quote>()
-            {
-                new Quote {quoteId=1, quoteCoinId=1, quote24Hr = 0.12, quotePrice=3900,quoteVolume=100000, quoteDateTime=new DateTime(2008, 5, 1, 8, 30, 52)}
-            };
-            context.Quotes.AddRange(testQuoteList);
-            context.SaveChanges();
-            List<Transaction> testTransactionList = new List<Transaction>()
-            {
-                new Transaction {transactionId=1,transactionPorfolioId=1, transactionCoinId=1}
-            };
-            context.Transactions.AddRange(testTransactionList);
-            context.SaveChanges();
-            //seed initial data into datagridview
-            dataGridViewCoins.DataSource = context.Transactions.Local.ToBindingList();
             //async request
             try
             {
@@ -90,15 +62,15 @@ namespace AS2ProjectTeam03
         void FormatDataGridView()
         {
             //hide id column
-            dataGridViewCoins.Columns["CoinId"].Visible = false;
+            //dataGridViewCoins.Columns["CoinId"].Visible = false;
             //format colums
-            dataGridViewCoins.Columns["CoinVolume24hr"].DefaultCellStyle.Format = "C0";
-            dataGridViewCoins.Columns["CoinQuote"].DefaultCellStyle.Format = "C2";
-            dataGridViewCoins.Columns["Coin24hr"].DefaultCellStyle.Format = "P2";
+            //dataGridViewCoins.Columns["CoinVolume24hr"].DefaultCellStyle.Format = "C0";
+            //dataGridViewCoins.Columns["CoinQuote"].DefaultCellStyle.Format = "C2";
+            //dataGridViewCoins.Columns["Coin24hr"].DefaultCellStyle.Format = "P2";
             //right-align number columns
-            dataGridViewCoins.Columns["CoinVolume24hr"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCoins.Columns["CoinQuote"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCoins.Columns["Coin24hr"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            //dataGridViewCoins.Columns["CoinVolume24hr"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            //dataGridViewCoins.Columns["CoinQuote"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            //dataGridViewCoins.Columns["Coin24hr"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             //get app width
             //int formWidth = this.Width;
             //get combobox centre point x
@@ -139,5 +111,49 @@ namespace AS2ProjectTeam03
                     break;
             }
         }
+        private void AS2ProjectTream03Form_Load(object sender, EventArgs e)
+        {
+            SeedTransactionDataTables();
+        }
+        private void SeedTransactionDataTables()
+        {
+            context.Database.Log = (s => Debug.Write(s));
+
+            context.Database.Delete();
+            context.Database.Create();
+            context.SaveChanges();
+            //context.Coins.Load();
+            //seed initial data into dbset
+            List<Coin> testCoinList = new List<Coin>()
+            {
+                new Coin {coinId = 1, coinName = "Bitcoin", coinSymbol="BTC", coinMaxSupply=21000000, },
+                new Coin {coinId = 2, coinName = "Ethereum", coinSymbol="ETH"},
+            };
+            context.Coins.AddRange(testCoinList);
+            context.SaveChanges();
+            List<Portfolio> testPortfolioList = new List<Portfolio>()
+            {
+                new Portfolio { portfolioId = 1, portfolioName = "Muh Test Portfolio"}
+            };
+            context.Portfolios.AddRange(testPortfolioList);
+            context.SaveChanges();
+            List<Quote> testQuoteList = new List<Quote>()
+            {
+                new Quote {quoteId=1, quoteCoinId=1, quote24Hr = 0.12, quotePrice=3900,quoteVolume=100000, quoteDateTime=new DateTime(2008, 5, 1, 8, 30, 52)}
+            };
+            context.Quotes.AddRange(testQuoteList);
+            context.SaveChanges();
+            List<Transaction> testTransactionList = new List<Transaction>()
+            {
+                new Transaction {transactionId=1,transactionPorfolioId=1, transactionCoinId=1}
+            };
+            context.Transactions.AddRange(testTransactionList);
+            context.SaveChanges();
+            //seed initial data into datagridview
+            dataGridViewCoins.DataSource = context.Transactions.Local.ToBindingList();
+
+        }
+
+
     }
 }
