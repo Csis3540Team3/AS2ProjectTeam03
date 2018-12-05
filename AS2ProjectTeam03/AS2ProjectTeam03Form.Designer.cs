@@ -50,16 +50,17 @@
             this.buttonUpdateQuotes = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.labelAddAPortfolio = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBoxPortfolioName = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.labelLatestQuotes = new System.Windows.Forms.Label();
+            this.labelDateTime = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCoins)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // labelCurrentValue
             // 
-            this.labelCurrentValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.labelCurrentValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.labelCurrentValue.Location = new System.Drawing.Point(778, -1);
             this.labelCurrentValue.Name = "labelCurrentValue";
             this.labelCurrentValue.Size = new System.Drawing.Size(371, 49);
@@ -83,10 +84,7 @@
             this.comboBoxPortfolio.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxPortfolio.FormattingEnabled = true;
             this.comboBoxPortfolio.Items.AddRange(new object[] {
-            "All Coins",
-            "My Portfolio",
-            "Favorites",
-            "New..."});
+            "My Portfolio"});
             this.comboBoxPortfolio.Location = new System.Drawing.Point(588, 7);
             this.comboBoxPortfolio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxPortfolio.Name = "comboBoxPortfolio";
@@ -108,7 +106,7 @@
             // 
             this.textBoxTransactionAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxTransactionAmount.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.textBoxTransactionAmount.Location = new System.Drawing.Point(735, 398);
+            this.textBoxTransactionAmount.Location = new System.Drawing.Point(696, 428);
             this.textBoxTransactionAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxTransactionAmount.Name = "textBoxTransactionAmount";
             this.textBoxTransactionAmount.Size = new System.Drawing.Size(152, 26);
@@ -124,7 +122,7 @@
             "BTC",
             "ETH",
             "XLM"});
-            this.comboBox1.Location = new System.Drawing.Point(1028, 398);
+            this.comboBox1.Location = new System.Drawing.Point(1028, 427);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 28);
@@ -134,7 +132,7 @@
             // 
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.textBox1.Location = new System.Drawing.Point(893, 398);
+            this.textBox1.Location = new System.Drawing.Point(871, 427);
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(129, 27);
@@ -144,7 +142,7 @@
             // buttonExportPortfolio
             // 
             this.buttonExportPortfolio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonExportPortfolio.Location = new System.Drawing.Point(841, 557);
+            this.buttonExportPortfolio.Location = new System.Drawing.Point(998, 521);
             this.buttonExportPortfolio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonExportPortfolio.Name = "buttonExportPortfolio";
             this.buttonExportPortfolio.Size = new System.Drawing.Size(151, 39);
@@ -155,7 +153,7 @@
             // buttonRestorePortfolio
             // 
             this.buttonRestorePortfolio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRestorePortfolio.Location = new System.Drawing.Point(998, 557);
+            this.buttonRestorePortfolio.Location = new System.Drawing.Point(828, 521);
             this.buttonRestorePortfolio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonRestorePortfolio.Name = "buttonRestorePortfolio";
             this.buttonRestorePortfolio.Size = new System.Drawing.Size(151, 39);
@@ -290,27 +288,27 @@
             // 
             this.labelAddAPortfolio.AutoSize = true;
             this.labelAddAPortfolio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAddAPortfolio.Location = new System.Drawing.Point(584, 452);
+            this.labelAddAPortfolio.Location = new System.Drawing.Point(584, 473);
             this.labelAddAPortfolio.Name = "labelAddAPortfolio";
             this.labelAddAPortfolio.Size = new System.Drawing.Size(124, 20);
             this.labelAddAPortfolio.TabIndex = 3;
             this.labelAddAPortfolio.Text = "Add a Portfolio:";
             // 
-            // textBox4
+            // textBoxPortfolioName
             // 
-            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.textBox4.Location = new System.Drawing.Point(841, 449);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(152, 26);
-            this.textBox4.TabIndex = 4;
-            this.textBox4.Text = "Amount of Units...";
+            this.textBoxPortfolioName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxPortfolioName.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.textBoxPortfolioName.Location = new System.Drawing.Point(827, 470);
+            this.textBoxPortfolioName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxPortfolioName.Name = "textBoxPortfolioName";
+            this.textBoxPortfolioName.Size = new System.Drawing.Size(152, 26);
+            this.textBoxPortfolioName.TabIndex = 4;
+            this.textBoxPortfolioName.Text = "Portfolio Name";
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(998, 443);
+            this.button1.Location = new System.Drawing.Point(998, 464);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(151, 39);
@@ -328,11 +326,21 @@
             this.labelLatestQuotes.TabIndex = 3;
             this.labelLatestQuotes.Text = "Latest Quotes:";
             // 
+            // labelDateTime
+            // 
+            this.labelDateTime.AutoSize = true;
+            this.labelDateTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDateTime.Location = new System.Drawing.Point(145, 15);
+            this.labelDateTime.Name = "labelDateTime";
+            this.labelDateTime.Size = new System.Drawing.Size(82, 20);
+            this.labelDateTime.TabIndex = 3;
+            this.labelDateTime.Text = "DateTime";
+            // 
             // AS2ProjectTeam03Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1161, 607);
+            this.ClientSize = new System.Drawing.Size(1161, 592);
             this.Controls.Add(this.buttonUpdateQuotes);
             this.Controls.Add(this.checkBoxMaxSupply);
             this.Controls.Add(this.buttonRestorePortfolio);
@@ -344,13 +352,14 @@
             this.Controls.Add(this.textBoxValueMin);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.textBoxPortfolioName);
             this.Controls.Add(this.textBoxTransactionAmount);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.labelValueMax);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelValueMin);
             this.Controls.Add(this.labelFilterBy);
+            this.Controls.Add(this.labelDateTime);
             this.Controls.Add(this.labelLatestQuotes);
             this.Controls.Add(this.labelAddAPortfolio);
             this.Controls.Add(this.labelAddTransaction);
@@ -391,9 +400,10 @@
         private System.Windows.Forms.Button buttonUpdateQuotes;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label labelAddAPortfolio;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBoxPortfolioName;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label labelLatestQuotes;
+        private System.Windows.Forms.Label labelDateTime;
     }
 }
 

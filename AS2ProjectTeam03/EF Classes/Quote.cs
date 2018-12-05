@@ -6,31 +6,29 @@ namespace AS2ProjectTeam03.EF_Classes
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Coin")]
-    public partial class Coin
+    [Table("Quote")]
+    public partial class Quote
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Coin()
+        public Quote()
         {
-            Quotes = new HashSet<Quote>();
             Transactions = new HashSet<Transaction>();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int coinId { get; set; }
+        public int quoteId { get; set; }
 
-        [Required]
-        [StringLength(20)]
-        public string coinName { get; set; }
+        public DateTime quoteDateTime { get; set; }
 
-        [Required]
-        [StringLength(5)]
-        public string coinSymbol { get; set; }
+        public double? quoteVolume { get; set; }
 
-        public double? coinMaxSupply { get; set; }
+        public double quotePrice { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Quote> Quotes { get; set; }
+        public double? quote24Hr { get; set; }
+
+        public int? quoteCoinId { get; set; }
+
+        public virtual Coin Coin { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaction> Transactions { get; set; }

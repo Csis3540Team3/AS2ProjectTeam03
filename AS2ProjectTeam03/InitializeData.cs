@@ -22,9 +22,6 @@ namespace AS2ProjectTeam03
                     CoinId = data.id,
                     CoinName = data.name,
                     CoinSymbol = data.symbol,
-                    CoinVolume24hr = data.quote.CAD.volume_24h,
-                    CoinQuote = data.quote.CAD.price,
-                    Coin24hr = (data.quote.CAD.percent_change_24h / 100)
                 };
             //returns a list to map to the gridview
             return coinRows.ToList();

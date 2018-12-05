@@ -20,9 +20,6 @@ namespace AS2ProjectTeam03
                         coinName = "Polis",
                         coinId = 203,
                         coinSymbol = "PPAY",
-                        coinCurrencyValue = 100,
-                        coinCurrency = "CAD",
-                        coin24HourChange = 0,
                         coinMaxSupply = 14000000
                     };
                     context.Coins.Add(coin);

@@ -29,7 +29,7 @@ namespace AS2ProjectTeam03
             public DateTime last_updated { get; set; }
         }
 
-        public class Quote
+        public class Currency
         {
             public CAD CAD { get; set; }
             //public Currency USD { get; set; }
@@ -48,7 +48,7 @@ namespace AS2ProjectTeam03
             public int num_market_pairs { get; set; }
             public int cmc_rank { get; set; }
             public DateTime last_updated { get; set; }
-            public Quote quote { get; set; }
+            public Currency currency { get; set; }
         }
 
         public class RootObject
@@ -70,12 +70,6 @@ namespace AS2ProjectTeam03
             public string CoinSymbol { get; set; }
             [DisplayName("Name")]
             public string CoinName { get; set; }
-            [DisplayName("24hrs Volume")]
-            public double CoinVolume24hr { get; set; }
-            [DisplayName("Quote")]
-            public double CoinQuote { get; set; }
-            [DisplayName("24hrs Change")]
-            public double Coin24hr { get; set; }
             //ToString override
             public override string ToString()
             {

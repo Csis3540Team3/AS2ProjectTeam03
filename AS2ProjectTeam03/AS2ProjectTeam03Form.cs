@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Net.Http;
@@ -21,21 +22,60 @@ namespace AS2ProjectTeam03
         public AS2ProjectTeam03Form()
         {
             InitializeComponent();
-
+            //setup EF dbset
             context = new CoinTrackerEntities();
+            //context.Database.Delete();
+            //context.Database.Create();
+            //context.SaveChanges();
+            //context.Coins.Load();
 
-            //async request
-            List<Datum> jsonList = WebRequest().Result;
             //initial data
-            //JavaScriptSerializer js = new JavaScriptSerializer();
-            //RootObject rootObject = js.Deserialize<RootObject>(new InitialJson().InitialJsonString);
-            //List<Datum> initialJson = rootObject.data;
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            RootObject rootObject = js.Deserialize<RootObject>(new InitialJson().InitialJsonString);
+            List<Datum> jsonList = rootObject.data;
             //get initial coin data
             List<CoinRow> coinRows = new InitializeData().GetCoinRows(jsonList);
+            //seed initial data into dbset
+            List<Coin> testCoinList = new List<Coin>()
+            {
+                new Coin {coinId = 1, coinName = "Bitcoin", coinSymbol="BTC", coinMaxSupply=21000000, },
+                new Coin {coinId = 2, coinName = "Ethereum", coinSymbol="ETH"},
+            };
+            context.Coins.AddRange(testCoinList);
+            context.SaveChanges();
+            List<Portfolio> testPortfolioList = new List<Portfolio>()
+            {
+                new Portfolio { portfolioId = 1, portfolioName = "Muh Test Portfolio"}
+            };
+            context.Portfolios.AddRange(testPortfolioList);
+            context.SaveChanges();
+            List<Quote> testQuoteList = new List<Quote>()
+            {
+                new Quote {quoteId=1, quoteCoinId=1, quote24Hr = 0.12, quotePrice=3900,quoteVolume=100000, quoteDateTime=new DateTime(2008, 5, 1, 8, 30, 52)}
+            };
+            context.Quotes.AddRange(testQuoteList);
+            context.SaveChanges();
+            List<Transaction> testTransactionList = new List<Transaction>()
+            {
+                new Transaction {transactionId=1,transactionPorfolioId=1, transactionCoinId=1}
+            };
+            context.Transactions.AddRange(testTransactionList);
+            context.SaveChanges();
             //seed initial data into datagridview
-            dataGridViewCoins.DataSource = coinRows;
+            dataGridViewCoins.DataSource = context.Transactions.Local.ToBindingList();
+            //async request
+            try
+            {
+                jsonList = WebRequest().Result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
             //format datagridview
             FormatDataGridView();
+            //set quote date
+            labelDateTime.Text = "Muh Date";
             //get portfolio value
             double portfolioValue = 0.0;
             //set portfolio label value
@@ -66,7 +106,7 @@ namespace AS2ProjectTeam03
             //center the combobox
             //comboBoxPortfolio.Location = new Point(comboBoxPortfolioCentreX, 8);
             //Default Portfolio
-            comboBoxPortfolio.SelectedItem = "All Coins";
+            comboBoxPortfolio.SelectedItem = "My Portfolio";
         }
 
         private void comboBoxPortfolio_SelectedIndexChanged(object sender, EventArgs e)
