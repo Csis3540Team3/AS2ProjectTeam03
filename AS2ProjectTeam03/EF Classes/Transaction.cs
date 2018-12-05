@@ -12,9 +12,9 @@ namespace AS2ProjectTeam03.EF_Classes
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int transactionId { get; set; }
 
-        public int? transactionPorfolioId { get; set; }
+        public int transactionPorfolioId { get; set; }
 
-        public int? transactionCoinId { get; set; }
+        public int transactionCoinId { get; set; }
 
         public int? transactionQuoteId { get; set; }
 

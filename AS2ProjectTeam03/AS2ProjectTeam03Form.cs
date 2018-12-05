@@ -150,7 +150,17 @@ namespace AS2ProjectTeam03
             context.Transactions.AddRange(testTransactionList);
             context.SaveChanges();
             //seed initial data into datagridview
-            dataGridViewCoins.DataSource = context.Transactions.Local.ToBindingList();
+            dataGridViewPortfolio.DataSource =
+                (from transaction in context.Transactions
+                 join coin in context.Coins on transaction.transactionCoinId equals coin.coinId
+                 select new CoinRow
+                 {
+                     CoinId = coin.coinId,
+                     CoinName = coin.coinName,
+                     CoinSymbol = coin.coinSymbol
+                 }).ToList();
+                //context.Transactions.Local.ToBindingList()
+                ;
 
         }
 

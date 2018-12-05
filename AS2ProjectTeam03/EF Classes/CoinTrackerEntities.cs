@@ -34,8 +34,9 @@ namespace AS2ProjectTeam03.EF_Classes
 
             modelBuilder.Entity<Coin>()
                 .HasMany(e => e.Transactions)
-                .WithOptional(e => e.Coin)
-                .HasForeignKey(e => e.transactionCoinId);
+                .WithRequired(e => e.Coin)
+                .HasForeignKey(e => e.transactionCoinId)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Portfolio>()
                 .Property(e => e.portfolioName)
@@ -43,8 +44,9 @@ namespace AS2ProjectTeam03.EF_Classes
 
             modelBuilder.Entity<Portfolio>()
                 .HasMany(e => e.Transactions)
-                .WithOptional(e => e.Portfolio)
-                .HasForeignKey(e => e.transactionPorfolioId);
+                .WithRequired(e => e.Portfolio)
+                .HasForeignKey(e => e.transactionPorfolioId)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Quote>()
                 .HasMany(e => e.Transactions)

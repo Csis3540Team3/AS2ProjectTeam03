@@ -17,12 +17,12 @@ CREATE TABLE Quote (
 Go
 Create Table Portfolio (
 	portfolioId Int Primary Key Not Null,
-	portfolioName Varchar (20)
+	portfolioName Varchar (20) Not Null
 )
 Go
 Create Table [Transaction] (
-	transactionId Int Primary Key,
-	transactionPorfolioId Int Foreign Key References Portfolio(portfolioId),
-	transactionCoinId Int Foreign Key References Coin(coinId),
+	transactionId Int Primary Key Not Null,
+	transactionPorfolioId Int Foreign Key References Portfolio(portfolioId) Not Null,
+	transactionCoinId Int Foreign Key References Coin(coinId) Not Null,
 	transactionQuoteId Int Foreign Key References Quote(quoteId)
 )

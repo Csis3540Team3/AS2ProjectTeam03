@@ -48,14 +48,14 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.checkBoxMaxSupply = new System.Windows.Forms.CheckBox();
             this.buttonUpdateQuotes = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewPortfolio = new System.Windows.Forms.DataGridView();
             this.labelAddAPortfolio = new System.Windows.Forms.Label();
             this.textBoxPortfolioName = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.labelLatestQuotes = new System.Windows.Forms.Label();
             this.labelDateTime = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCoins)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPortfolio)).BeginInit();
             this.SuspendLayout();
             // 
             // labelCurrentValue
@@ -274,15 +274,15 @@
             this.buttonUpdateQuotes.Text = "Update Quotes";
             this.buttonUpdateQuotes.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dataGridViewPortfolio
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(588, 50);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(561, 333);
-            this.dataGridView1.TabIndex = 2;
+            this.dataGridViewPortfolio.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewPortfolio.Location = new System.Drawing.Point(588, 50);
+            this.dataGridViewPortfolio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridViewPortfolio.Name = "dataGridViewPortfolio";
+            this.dataGridViewPortfolio.RowTemplate.Height = 24;
+            this.dataGridViewPortfolio.Size = new System.Drawing.Size(561, 333);
+            this.dataGridViewPortfolio.TabIndex = 2;
             // 
             // labelAddAPortfolio
             // 
@@ -364,14 +364,14 @@
             this.Controls.Add(this.labelAddAPortfolio);
             this.Controls.Add(this.labelAddTransaction);
             this.Controls.Add(this.comboBoxPortfolio);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridViewPortfolio);
             this.Controls.Add(this.dataGridViewCoins);
             this.Controls.Add(this.labelCurrentValue);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AS2ProjectTeam03Form";
             this.Text = "Cryptocurrency Tracker";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCoins)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPortfolio)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -398,7 +398,7 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.CheckBox checkBoxMaxSupply;
         private System.Windows.Forms.Button buttonUpdateQuotes;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewPortfolio;
         private System.Windows.Forms.Label labelAddAPortfolio;
         private System.Windows.Forms.TextBox textBoxPortfolioName;
         private System.Windows.Forms.Button button1;

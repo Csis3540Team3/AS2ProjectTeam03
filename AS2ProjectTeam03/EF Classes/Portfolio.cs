@@ -18,6 +18,7 @@ namespace AS2ProjectTeam03.EF_Classes
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int portfolioId { get; set; }
 
+        [Required]
         [StringLength(20)]
         public string portfolioName { get; set; }
 
