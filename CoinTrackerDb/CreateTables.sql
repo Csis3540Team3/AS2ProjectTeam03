@@ -25,6 +25,6 @@ Create Table [Transaction] (
 	transactionPorfolioId Int Foreign Key References Portfolio(portfolioId) Not Null,
 	transactionCoinId Int Foreign Key References Coin(coinId) Not Null,
 	transactionQuoteId Int Foreign Key References Quote(quoteId),
-	transactionAmount Int Not Null,
+	transactionAmount Float Not Null,
 	transactionPricePerCoin Float Not Null
 )

@@ -18,7 +18,7 @@ namespace AS2ProjectTeam03.EF_Classes
 
         public int? transactionQuoteId { get; set; }
 
-        public int transactionAmount { get; set; }
+        public double transactionAmount { get; set; }
 
         public double transactionPricePerCoin { get; set; }
 

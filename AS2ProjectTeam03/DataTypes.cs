@@ -64,7 +64,16 @@ namespace AS2ProjectTeam03
         /// </summary>
         public class CoinRow
         {
-            //[DisplayName("Coin ID")]
+            public int CoinId { get; set; }
+            [DisplayName("Symbol")]
+            public string CoinSymbol { get; set; }
+            [DisplayName("Name")]
+            public string CoinName { get; set; }
+            //ToString override
+            public long MaxSupply { get; set; }
+        }
+        public class PortfolioRow
+        {
             public int CoinId { get; set; }
             [DisplayName("Symbol")]
             public string CoinSymbol { get; set; }
@@ -73,10 +82,7 @@ namespace AS2ProjectTeam03
             //ToString override
             public double TransactionAmount { get; set; }
             public double TransactionPricePerCoin { get; set; }
-            public override string ToString()
-            {
-                return $"CoinId: , CoinSymbol: {CoinSymbol}, CoinName: {CoinName}";
-            }
+            public double TransactionTotal { get; set; }
         }
     }
 }

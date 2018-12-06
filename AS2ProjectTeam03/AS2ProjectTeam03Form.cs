@@ -112,7 +112,8 @@ namespace AS2ProjectTeam03
                                     {
                                         coinName = coin.name,
                                         coinId = coin.id,
-                                        coinSymbol = coin.symbol
+                                        coinSymbol = coin.symbol,
+                                        coinMaxSupply = coin.max_supply
                                     }).ToList());
             context.SaveChanges();
             dataGridViewCoins.DataSource = context.Coins.Local.ToBindingList();
@@ -131,7 +132,7 @@ namespace AS2ProjectTeam03
             context.SaveChanges();
             List<Transaction> testTransactionList = new List<Transaction>()
             {
-                new Transaction {transactionId=1,transactionPorfolioId=1, transactionCoinId=1, transactionAmount=1, transactionPricePerCoin=1250}
+                new Transaction {transactionId=1,transactionPorfolioId=1, transactionCoinId=1, transactionAmount=3.14, transactionPricePerCoin=1250}
             };
             context.Transactions.AddRange(testTransactionList);
             context.SaveChanges();
@@ -139,13 +140,14 @@ namespace AS2ProjectTeam03
             dataGridViewPortfolio.DataSource =
                 (from transaction in context.Transactions
                  join coin in context.Coins on transaction.transactionCoinId equals coin.coinId
-                 select new CoinRow
+                 select new PortfolioRow
                  {
                      CoinId = coin.coinId,
                      CoinName = coin.coinName,
                      CoinSymbol = coin.coinSymbol,
                      TransactionAmount = transaction.transactionAmount,
-                     TransactionPricePerCoin = transaction.transactionPricePerCoin
+                     TransactionPricePerCoin = transaction.transactionPricePerCoin,
+                     TransactionTotal = transaction.transactionAmount * transaction.transactionPricePerCoin
                  }).ToList();
                 //context.Transactions.Local.ToBindingList()
                 ;
