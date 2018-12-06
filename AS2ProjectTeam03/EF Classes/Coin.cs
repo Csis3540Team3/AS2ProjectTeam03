@@ -20,14 +20,14 @@ namespace AS2ProjectTeam03.EF_Classes
         public int coinId { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [StringLength(100)]
         public string coinName { get; set; }
 
         [Required]
-        [StringLength(5)]
+        [StringLength(10)]
         public string coinSymbol { get; set; }
 
-        public double? coinMaxSupply { get; set; }
+        public long? coinMaxSupply { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Quote> Quotes { get; set; }

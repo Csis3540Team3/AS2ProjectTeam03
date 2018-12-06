@@ -71,6 +71,8 @@ namespace AS2ProjectTeam03
             [DisplayName("Name")]
             public string CoinName { get; set; }
             //ToString override
+            public double TransactionAmount { get; set; }
+            public double TransactionPricePerCoin { get; set; }
             public override string ToString()
             {
                 return $"CoinId: , CoinSymbol: {CoinSymbol}, CoinName: {CoinName}";

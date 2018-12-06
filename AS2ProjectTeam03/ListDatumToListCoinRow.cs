@@ -7,7 +7,10 @@ using static AS2ProjectTeam03.DataTypes;
 
 namespace AS2ProjectTeam03
 {
-    public class InitializeData
+    /// <summary>
+    /// gets a list of datum and returns a list of coinrows
+    /// </summary>
+    public class ListDatumToListCoinRow
     {
         public List<CoinRow> GetCoinRows(List<Datum> initialData)
         {

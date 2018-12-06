@@ -43,7 +43,7 @@ namespace AS2ProjectTeam03
         }
         static void DoIndependentWork()
         {
-            Console.WriteLine("Working...");
+            Console.WriteLine("Downloading data...");
         }
     }
 }

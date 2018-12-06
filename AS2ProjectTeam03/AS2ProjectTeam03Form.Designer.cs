@@ -369,7 +369,7 @@
             this.Controls.Add(this.labelCurrentValue);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AS2ProjectTeam03Form";
-            this.Text = "Cryptocurrency Tracker";
+            this.Text = "Coin Tracker";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCoins)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPortfolio)).EndInit();
             this.ResumeLayout(false);

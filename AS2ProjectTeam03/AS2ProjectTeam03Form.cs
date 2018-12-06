@@ -19,26 +19,23 @@ namespace AS2ProjectTeam03
 {
     public partial class AS2ProjectTeam03Form : Form
     {
+        //setup EF context
         private CoinTrackerEntities context;
         public AS2ProjectTeam03Form()
         {
+
             InitializeComponent();
             //setup EF dbset
+
             context = new CoinTrackerEntities();
+            //onload event
 
             this.Load += AS2ProjectTream03Form_Load;
 
-
-            //initial data
-            JavaScriptSerializer js = new JavaScriptSerializer();
-            RootObject rootObject = js.Deserialize<RootObject>(new InitialJson().InitialJsonString);
-            List<Datum> jsonList = rootObject.data;
-            //get initial coin data
-            List<CoinRow> coinRows = new InitializeData().GetCoinRows(jsonList);
             //async request
             try
             {
-                jsonList = WebRequest().Result;
+                //jsonList = WebRequest().Result;
             }
             catch (Exception e)
             {
@@ -46,8 +43,6 @@ namespace AS2ProjectTeam03
             }
             //format datagridview
             FormatDataGridView();
-            //set quote date
-            labelDateTime.Text = "Muh Date";
             //get portfolio value
             double portfolioValue = 0.0;
             //set portfolio label value
@@ -83,33 +78,7 @@ namespace AS2ProjectTeam03
 
         private void comboBoxPortfolio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Console.WriteLine(comboBoxPortfolio.SelectedIndex.ToString());
-            switch (comboBoxPortfolio.SelectedIndex)
-            {
-                case 0:
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-                //case 3:
-                //    NewPortfolioForm newPortfolio = new NewPortfolioForm();
-                //    // Show newPortfolio as a modal dialog and determine if DialogResult = OK.
-                //    if (newPortfolio.ShowDialog(this) == DialogResult.OK)
-                //    {
-                //        // Read the contents of newPortfolio's TextBox.
-                //        this.comboBoxPortfolio.Text = newPortfolio.portfolioUserInput.Text;
-                //    }
-                //    else
-                //    {
-                //        this.comboBoxPortfolio.Text = "Cancelled";
-                //    }
-                //    newPortfolio.Dispose();
-                //    break;
-                default:
-                    Console.WriteLine(comboBoxPortfolio.SelectedIndex);
-                    break;
-            }
+            Console.WriteLine($"Portfolio selected index: {comboBoxPortfolio.SelectedIndex.ToString()}");
         }
         private void AS2ProjectTream03Form_Load(object sender, EventArgs e)
         {
@@ -117,7 +86,8 @@ namespace AS2ProjectTeam03
         }
         private void SeedTransactionDataTables()
         {
-            context.Database.Log = (s => Debug.Write(s));
+            //Entities framework initialization
+            context.Database.Log = s => Debug.WriteLine(s);
 
             context.Database.Delete();
             context.Database.Create();
@@ -126,11 +96,27 @@ namespace AS2ProjectTeam03
             //seed initial data into dbset
             List<Coin> testCoinList = new List<Coin>()
             {
-                new Coin {coinId = 1, coinName = "Bitcoin", coinSymbol="BTC", coinMaxSupply=21000000, },
-                new Coin {coinId = 2, coinName = "Ethereum", coinSymbol="ETH"},
+                new Coin {coinId = 1000, coinName = "Bitcoin", coinSymbol="BTC", coinMaxSupply=21000000, },
+                new Coin {coinId = 1002, coinName = "Ethereum", coinSymbol="ETH"},
             };
             context.Coins.AddRange(testCoinList);
             context.SaveChanges();
+
+            //load initial data into a list of datum
+            List<Datum> datumList = new InitialData().GetInitialData();
+            //pases a Datum list and gets a CoinRow list
+            List<CoinRow> initialCoinRows = new ListDatumToListCoinRow().GetCoinRows(datumList);
+            //set initial coins into database context
+            context.Coins.AddRange((from coin in datumList
+                                    select new Coin
+                                    {
+                                        coinName = coin.name,
+                                        coinId = coin.id,
+                                        coinSymbol = coin.symbol
+                                    }).ToList());
+            context.SaveChanges();
+            dataGridViewCoins.DataSource = context.Coins.Local.ToBindingList();
+            //testing
             List<Portfolio> testPortfolioList = new List<Portfolio>()
             {
                 new Portfolio { portfolioId = 1, portfolioName = "Muh Test Portfolio"}
@@ -139,13 +125,13 @@ namespace AS2ProjectTeam03
             context.SaveChanges();
             List<Quote> testQuoteList = new List<Quote>()
             {
-                new Quote {quoteId=1, quoteCoinId=1, quote24Hr = 0.12, quotePrice=3900,quoteVolume=100000, quoteDateTime=new DateTime(2008, 5, 1, 8, 30, 52)}
+                new Quote {quoteId=1, quoteCoinId=1, quote24Hr = 0.12, quotePrice=1300,quoteVolume=100000, quoteDateTime=new DateTime(2017, 5, 1, 8, 30, 52)}
             };
             context.Quotes.AddRange(testQuoteList);
             context.SaveChanges();
             List<Transaction> testTransactionList = new List<Transaction>()
             {
-                new Transaction {transactionId=1,transactionPorfolioId=1, transactionCoinId=1}
+                new Transaction {transactionId=1,transactionPorfolioId=1, transactionCoinId=1, transactionAmount=1, transactionPricePerCoin=1250}
             };
             context.Transactions.AddRange(testTransactionList);
             context.SaveChanges();
@@ -157,10 +143,14 @@ namespace AS2ProjectTeam03
                  {
                      CoinId = coin.coinId,
                      CoinName = coin.coinName,
-                     CoinSymbol = coin.coinSymbol
+                     CoinSymbol = coin.coinSymbol,
+                     TransactionAmount = transaction.transactionAmount,
+                     TransactionPricePerCoin = transaction.transactionPricePerCoin
                  }).ToList();
                 //context.Transactions.Local.ToBindingList()
                 ;
+            //set quote date
+            labelDateTime.Text = datumList[0].last_updated.ToString();//rootObject.status.timestamp.ToString();
 
         }
 

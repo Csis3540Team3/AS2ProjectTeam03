@@ -1,9 +1,9 @@
 ﻿Go
 Create Table Coin (
 	coinId Int Primary Key Not Null,
-	coinName Varchar (20) Not Null,
-	coinSymbol Varchar (5) Not Null,
-	coinMaxSupply Float
+	coinName Varchar (100) Not Null,
+	coinSymbol Varchar (10) Not Null,
+	coinMaxSupply BigInt
 )
 GO
 CREATE TABLE Quote (
@@ -24,5 +24,7 @@ Create Table [Transaction] (
 	transactionId Int Primary Key Not Null,
 	transactionPorfolioId Int Foreign Key References Portfolio(portfolioId) Not Null,
 	transactionCoinId Int Foreign Key References Coin(coinId) Not Null,
-	transactionQuoteId Int Foreign Key References Quote(quoteId)
+	transactionQuoteId Int Foreign Key References Quote(quoteId),
+	transactionAmount Int Not Null,
+	transactionPricePerCoin Float Not Null
 )
