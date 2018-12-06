@@ -69,7 +69,6 @@ namespace AS2ProjectTeam03
             public string CoinSymbol { get; set; }
             [DisplayName("Name")]
             public string CoinName { get; set; }
-            //ToString override
             public long MaxSupply { get; set; }
         }
         public class PortfolioRow
@@ -79,7 +78,6 @@ namespace AS2ProjectTeam03
             public string CoinSymbol { get; set; }
             [DisplayName("Name")]
             public string CoinName { get; set; }
-            //ToString override
             public double TransactionAmount { get; set; }
             public double TransactionPricePerCoin { get; set; }
             public double TransactionTotal { get; set; }

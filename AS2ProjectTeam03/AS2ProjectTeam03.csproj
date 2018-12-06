@@ -83,7 +83,6 @@
     <Compile Include="InitialData.cs" />
     <Compile Include="InitialJsonString.cs" />
     <Compile Include="WebApiRequest.cs" />
-    <Compile Include="AddNewRecord.cs" />
     <Compile Include="AS2ProjectTeam03Form.cs">
       <SubType>Form</SubType>
     </Compile>

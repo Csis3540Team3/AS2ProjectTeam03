@@ -9,11 +9,11 @@
     <TransactionTotal>3941.1710000000003</TransactionTotal>
   </PortfolioRow>
   <PortfolioRow>
-    <CoinId>3020</CoinId>
-    <CoinSymbol>BHPC</CoinSymbol>
-    <CoinName>BHPCash</CoinName>
-    <TransactionAmount>12</TransactionAmount>
-    <TransactionPricePerCoin>34</TransactionPricePerCoin>
-    <TransactionTotal>408</TransactionTotal>
+    <CoinId>2095</CoinId>
+    <CoinSymbol>BOS</CoinSymbol>
+    <CoinName>BOScoin</CoinName>
+    <TransactionAmount>4</TransactionAmount>
+    <TransactionPricePerCoin>12</TransactionPricePerCoin>
+    <TransactionTotal>48</TransactionTotal>
   </PortfolioRow>
 </ArrayOfPortfolioRow>

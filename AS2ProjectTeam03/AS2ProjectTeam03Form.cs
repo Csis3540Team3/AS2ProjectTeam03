@@ -32,15 +32,6 @@ namespace AS2ProjectTeam03
             //onload event
             this.Load += AS2ProjectTream03Form_Load;
             //onclick placeholder
-            //async request
-            try
-            {
-                //jsonList = WebRequest().Result;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
             //format datagridview
             FormatDataGridView();
             //get portfolio value
@@ -123,7 +114,6 @@ namespace AS2ProjectTeam03
         }
         private void comboBoxPortfolio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Console.WriteLine($"Portfolio selected index: {comboBoxPortfolio.SelectedIndex.ToString()}");
         }
         private void AS2ProjectTream03Form_Load(object sender, EventArgs e)
         {
@@ -138,30 +128,8 @@ namespace AS2ProjectTeam03
             context.Database.Create();
             context.SaveChanges();
             //context.Coins.Load();
-            //seed initial data into dbset
-            List<Coin> testCoinList = new List<Coin>()
-            {
-                new Coin {coinId = 1000, coinName = "Bitcoin", coinSymbol="BTC", coinMaxSupply=21000000, },
-                new Coin {coinId = 1002, coinName = "Ethereum", coinSymbol="ETH"},
-            };
-            context.Coins.AddRange(testCoinList);
-            context.SaveChanges();
-
-            //load initial data into a list of datum
-            List<Datum> datumList = new InitialData().GetInitialData();
-            //pases a Datum list and gets a CoinRow list
-            List<CoinRow> initialCoinRows = new ListDatumToListCoinRow().GetCoinRows(datumList);
-            //set initial coins into database context
-            context.Coins.AddRange((from coin in datumList
-                                    select new Coin
-                                    {
-                                        coinName = coin.name,
-                                        coinId = coin.id,
-                                        coinSymbol = coin.symbol,
-                                        coinMaxSupply = coin.max_supply
-                                    }).ToList());
-            context.SaveChanges();
-            dataGridViewCoins.DataSource = context.Coins.Local.ToBindingList();
+            //seed coin data
+            List<Datum> datumList = SeedCoinData();
             //testing
             List<Portfolio> testPortfolioList = new List<Portfolio>()
             {
@@ -177,7 +145,8 @@ namespace AS2ProjectTeam03
             context.SaveChanges();
             List<Transaction> testTransactionList = new List<Transaction>()
             {
-                new Transaction {transactionId=1,transactionPorfolioId=1, transactionCoinId=1, transactionAmount=3.14, transactionPricePerCoin=1255.15}
+                new Transaction {transactionId=1,transactionPorfolioId=1, transactionCoinId=1, transactionAmount=3.14, transactionPricePerCoin=1255.15},
+                new Transaction {transactionId=2,transactionPorfolioId=1, transactionCoinId=1027, transactionAmount=4.23, transactionPricePerCoin=15.21}
             };
             context.Transactions.AddRange(testTransactionList);
             context.SaveChanges();
@@ -190,15 +159,40 @@ namespace AS2ProjectTeam03
             //set DataSource for dataGridView
             DataGridViewPortfolioDataSource();
             //set quote date
-            labelDateTime.Text = datumList[0].last_updated.ToString();//rootObject.status.timestamp.ToString();
-
+            labelDateTime.Text = datumList[0].last_updated.ToString();
         }
+        List<Datum> SeedCoinData()
+        {
+            //load initial data into a list of datum
+            List<Datum> datumList = new InitialData().GetInitialData();
+            //pases a Datum list and gets a CoinRow list
+            List<CoinRow> initialCoinRows = new ListDatumToListCoinRow().GetCoinRows(datumList);
+            //set initial coins into database context
+            context.Coins.AddRange((from coin in datumList
+                                    where (checkBoxMaxSupply.Checked == true && coin.max_supply > 0 || checkBoxMaxSupply.Checked == false)
+                                    select new Coin
+                                    {
+                                        coinName = coin.name,
+                                        coinId = coin.id,
+                                        coinSymbol = coin.symbol,
+                                        coinMaxSupply = coin.max_supply
+                                    }).ToList());
+            context.SaveChanges();
+            dataGridViewCoins.Refresh();
+            dataGridViewCoins.DataSource = context.Coins.Local.ToBindingList();
+            return datumList;
+        }
+        /// <summary>
+        /// returns a list to use as datasouce in portfolio data grid view
+        /// </summary>
+        /// <returns></returns>
         private List<PortfolioRow> DataGridViewPortfolioDataSource()
         {
             List<PortfolioRow> portfolioRowList = new List<PortfolioRow>();
             portfolioRowList =
                 (from transaction in context.Transactions
                  join coin in context.Coins on transaction.transactionCoinId equals coin.coinId
+                 where (checkBoxMaxSupply.Checked==true && coin.coinMaxSupply>0 || checkBoxMaxSupply.Checked == false)
                  select new PortfolioRow
                  {
                      CoinId = coin.coinId,
@@ -208,7 +202,10 @@ namespace AS2ProjectTeam03
                      TransactionPricePerCoin = transaction.transactionPricePerCoin,
                      TransactionTotal = transaction.transactionAmount * transaction.transactionPricePerCoin
                  }).ToList();
-            //context.Transactions.Local.ToBindingList()
+            //calculate total value of portfolio
+            double calculateTotalPortfolioValue = (from entry in portfolioRowList select entry.TransactionTotal).Sum();
+            //publish total value of portfolio
+            labelCurrentValue.Text = calculateTotalPortfolioValue.ToString("C2");
             //seed initial data into datagridview
             dataGridViewPortfolio.DataSource = portfolioRowList;
             return portfolioRowList;
@@ -246,11 +243,17 @@ namespace AS2ProjectTeam03
         {
             List<PortfolioRow> portfolioRowList = DataGridViewPortfolioDataSource();
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<PortfolioRow>));
-            using (TextWriter writer = new StreamWriter(Path.GetFullPath(Application.StartupPath + "\\..\\..\\xmlExport.xml")))
+            using (TextWriter writer = new StreamWriter(Path.GetFullPath(Application.StartupPath + "\\..\\..\\..\\xmlExport.xml")))
             {
                 xmlSerializer.Serialize(writer, portfolioRowList);
             }
             MessageBox.Show("Exported to the project folder as xmlExport.xml!", "Success");
+        }
+
+        private void checkBoxMaxSupply_CheckedChanged(object sender, EventArgs e)
+        {
+            dataGridViewCoins.Refresh();
+            DataGridViewPortfolioDataSource();
         }
     }
 }
