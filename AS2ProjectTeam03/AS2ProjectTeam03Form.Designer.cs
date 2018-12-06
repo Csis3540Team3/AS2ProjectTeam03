@@ -33,8 +33,8 @@
             this.comboBoxPortfolio = new System.Windows.Forms.ComboBox();
             this.labelAddTransaction = new System.Windows.Forms.Label();
             this.textBoxTransactionAmount = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.comboBoxSymbol = new System.Windows.Forms.ComboBox();
+            this.textBoxCost = new System.Windows.Forms.TextBox();
             this.buttonExportPortfolio = new System.Windows.Forms.Button();
             this.buttonRestorePortfolio = new System.Windows.Forms.Button();
             this.labelFilterBy = new System.Windows.Forms.Label();
@@ -51,7 +51,7 @@
             this.dataGridViewPortfolio = new System.Windows.Forms.DataGridView();
             this.labelAddAPortfolio = new System.Windows.Forms.Label();
             this.textBoxPortfolioName = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonAddTransaction = new System.Windows.Forms.Button();
             this.labelLatestQuotes = new System.Windows.Forms.Label();
             this.labelDateTime = new System.Windows.Forms.Label();
             this.checkBoxIsMineable = new System.Windows.Forms.CheckBox();
@@ -72,11 +72,11 @@
             // dataGridViewCoins
             // 
             this.dataGridViewCoins.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewCoins.Location = new System.Drawing.Point(12, 321);
+            this.dataGridViewCoins.Location = new System.Drawing.Point(12, 336);
             this.dataGridViewCoins.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridViewCoins.Name = "dataGridViewCoins";
             this.dataGridViewCoins.RowTemplate.Height = 24;
-            this.dataGridViewCoins.Size = new System.Drawing.Size(1137, 303);
+            this.dataGridViewCoins.Size = new System.Drawing.Size(1137, 288);
             this.dataGridViewCoins.TabIndex = 2;
             // 
             // comboBoxPortfolio
@@ -97,7 +97,7 @@
             // 
             this.labelAddTransaction.AutoSize = true;
             this.labelAddTransaction.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAddTransaction.Location = new System.Drawing.Point(12, 246);
+            this.labelAddTransaction.Location = new System.Drawing.Point(12, 241);
             this.labelAddTransaction.Name = "labelAddTransaction";
             this.labelAddTransaction.Size = new System.Drawing.Size(145, 20);
             this.labelAddTransaction.TabIndex = 3;
@@ -107,38 +107,35 @@
             // 
             this.textBoxTransactionAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxTransactionAmount.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.textBoxTransactionAmount.Location = new System.Drawing.Point(163, 243);
+            this.textBoxTransactionAmount.Location = new System.Drawing.Point(308, 238);
             this.textBoxTransactionAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxTransactionAmount.Name = "textBoxTransactionAmount";
             this.textBoxTransactionAmount.Size = new System.Drawing.Size(152, 26);
             this.textBoxTransactionAmount.TabIndex = 4;
-            this.textBoxTransactionAmount.Text = "Amount of Units...";
+            this.textBoxTransactionAmount.Text = "Amount of Units";
             // 
-            // comboBox1
+            // comboBoxSymbol
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Select Coin to Add...",
-            "BTC",
-            "ETH",
-            "XLM"});
-            this.comboBox1.Location = new System.Drawing.Point(456, 241);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 28);
-            this.comboBox1.TabIndex = 5;
+            this.comboBoxSymbol.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxSymbol.FormattingEnabled = true;
+            this.comboBoxSymbol.Items.AddRange(new object[] {
+            "Select Coin"});
+            this.comboBoxSymbol.Location = new System.Drawing.Point(181, 238);
+            this.comboBoxSymbol.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBoxSymbol.Name = "comboBoxSymbol";
+            this.comboBoxSymbol.Size = new System.Drawing.Size(121, 28);
+            this.comboBoxSymbol.TabIndex = 5;
             // 
-            // textBox1
+            // textBoxCost
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.textBox1.Location = new System.Drawing.Point(321, 242);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(129, 27);
-            this.textBox1.TabIndex = 6;
-            this.textBox1.Text = "Cost per unit";
+            this.textBoxCost.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCost.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.textBoxCost.Location = new System.Drawing.Point(466, 237);
+            this.textBoxCost.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxCost.Name = "textBoxCost";
+            this.textBoxCost.Size = new System.Drawing.Size(129, 27);
+            this.textBoxCost.TabIndex = 6;
+            this.textBoxCost.Text = "Cost per Unit";
             // 
             // buttonExportPortfolio
             // 
@@ -267,7 +264,7 @@
             // buttonUpdateQuotes
             // 
             this.buttonUpdateQuotes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonUpdateQuotes.Location = new System.Drawing.Point(962, 278);
+            this.buttonUpdateQuotes.Location = new System.Drawing.Point(962, 293);
             this.buttonUpdateQuotes.Margin = new System.Windows.Forms.Padding(4);
             this.buttonUpdateQuotes.Name = "buttonUpdateQuotes";
             this.buttonUpdateQuotes.Size = new System.Drawing.Size(187, 37);
@@ -306,16 +303,17 @@
             this.textBoxPortfolioName.TabIndex = 4;
             this.textBoxPortfolioName.Text = "Portfolio Name";
             // 
-            // button1
+            // buttonAddTransaction
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(501, 7);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(151, 39);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "New Portfolio";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonAddTransaction.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAddTransaction.Location = new System.Drawing.Point(601, 231);
+            this.buttonAddTransaction.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonAddTransaction.Name = "buttonAddTransaction";
+            this.buttonAddTransaction.Size = new System.Drawing.Size(84, 39);
+            this.buttonAddTransaction.TabIndex = 7;
+            this.buttonAddTransaction.Text = "Add";
+            this.buttonAddTransaction.UseVisualStyleBackColor = true;
+            this.buttonAddTransaction.Click += new System.EventHandler(this.buttonAddTransaction_Click);
             // 
             // labelLatestQuotes
             // 
@@ -358,14 +356,14 @@
             this.Controls.Add(this.buttonUpdateQuotes);
             this.Controls.Add(this.checkBoxMaxSupply);
             this.Controls.Add(this.buttonRestorePortfolio);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonAddTransaction);
             this.Controls.Add(this.buttonExportPortfolio);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBoxValueMax);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBoxValueMin);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.textBoxCost);
+            this.Controls.Add(this.comboBoxSymbol);
             this.Controls.Add(this.textBoxPortfolioName);
             this.Controls.Add(this.textBoxTransactionAmount);
             this.Controls.Add(this.label2);
@@ -397,8 +395,8 @@
         private System.Windows.Forms.ComboBox comboBoxPortfolio;
         private System.Windows.Forms.Label labelAddTransaction;
         private System.Windows.Forms.TextBox textBoxTransactionAmount;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ComboBox comboBoxSymbol;
+        private System.Windows.Forms.TextBox textBoxCost;
         private System.Windows.Forms.Button buttonExportPortfolio;
         private System.Windows.Forms.Button buttonRestorePortfolio;
         private System.Windows.Forms.Label labelFilterBy;
@@ -415,7 +413,7 @@
         private System.Windows.Forms.DataGridView dataGridViewPortfolio;
         private System.Windows.Forms.Label labelAddAPortfolio;
         private System.Windows.Forms.TextBox textBoxPortfolioName;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonAddTransaction;
         private System.Windows.Forms.Label labelLatestQuotes;
         private System.Windows.Forms.Label labelDateTime;
         private System.Windows.Forms.CheckBox checkBoxIsMineable;

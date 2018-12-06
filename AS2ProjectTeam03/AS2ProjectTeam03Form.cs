@@ -29,9 +29,8 @@ namespace AS2ProjectTeam03
 
             context = new CoinTrackerEntities();
             //onload event
-
             this.Load += AS2ProjectTream03Form_Load;
-
+            //onclick placeholder
             //async request
             try
             {
@@ -74,8 +73,53 @@ namespace AS2ProjectTeam03
             //comboBoxPortfolio.Location = new Point(comboBoxPortfolioCentreX, 8);
             //Default Portfolio
             comboBoxPortfolio.SelectedItem = "My Portfolio";
+            textBoxTransactionAmount.Click += AmountResetText;
+            textBoxTransactionAmount.LostFocus += AmountRestoreText;
+            textBoxCost.Click += CostResetText;
+            textBoxCost.LostFocus += CostRestoreText;
+            comboBoxSymbol.Click += ShowSymbols;
+            comboBoxSymbol.SelectedItem = "Select Coin";
         }
-
+        private void ShowSymbols(object sender, EventArgs e)
+        {
+            comboBoxSymbol.DroppedDown = true;
+        }
+        private void AmountResetText(object sender, EventArgs e)
+        {
+            //clear if not already filled
+            if (textBoxTransactionAmount.Text == "Amount of Units")
+            {
+                textBoxTransactionAmount.Text = "";
+                textBoxTransactionAmount.ForeColor = Color.Black;
+            }
+        }
+        private void AmountRestoreText(object sender, EventArgs e)
+        {
+            //if left blank
+            if (textBoxTransactionAmount.Text == "")
+            {
+                textBoxTransactionAmount.Text = "Amount of Units";
+                textBoxTransactionAmount.ForeColor = Color.Gray;
+            }
+        }
+        private void CostResetText(object sender, EventArgs e)
+        {
+            //if not filled already
+            if (textBoxCost.Text == "Cost per Unit")
+            {
+                textBoxCost.Text = "";
+                textBoxCost.ForeColor = Color.Black;
+            }
+        }
+        private void CostRestoreText(object sender, EventArgs e)
+        {
+            //if left blank
+            if (textBoxCost.Text == "")
+            {
+                textBoxCost.Text = "Cost per Unit";
+                textBoxCost.ForeColor = Color.Gray;
+            }
+        }
         private void comboBoxPortfolio_SelectedIndexChanged(object sender, EventArgs e)
         {
             Console.WriteLine($"Portfolio selected index: {comboBoxPortfolio.SelectedIndex.ToString()}");
@@ -132,10 +176,24 @@ namespace AS2ProjectTeam03
             context.SaveChanges();
             List<Transaction> testTransactionList = new List<Transaction>()
             {
-                new Transaction {transactionId=1,transactionPorfolioId=1, transactionCoinId=1, transactionAmount=3.14, transactionPricePerCoin=1250}
+                new Transaction {transactionId=1,transactionPorfolioId=1, transactionCoinId=1, transactionAmount=3.14, transactionPricePerCoin=1255.15}
             };
             context.Transactions.AddRange(testTransactionList);
             context.SaveChanges();
+            //seed coins into combobox
+            comboBoxSymbol.Items.AddRange((
+                from coin in context.Coins
+                orderby coin.coinSymbol
+                select coin.coinSymbol
+                ).ToArray());
+            //set DataSource for dataGridView
+            DataGridViewPortfolioDataSource();
+            //set quote date
+            labelDateTime.Text = datumList[0].last_updated.ToString();//rootObject.status.timestamp.ToString();
+
+        }
+        private void DataGridViewPortfolioDataSource()
+        {
             //seed initial data into datagridview
             dataGridViewPortfolio.DataSource =
                 (from transaction in context.Transactions
@@ -149,13 +207,37 @@ namespace AS2ProjectTeam03
                      TransactionPricePerCoin = transaction.transactionPricePerCoin,
                      TransactionTotal = transaction.transactionAmount * transaction.transactionPricePerCoin
                  }).ToList();
-                //context.Transactions.Local.ToBindingList()
-                ;
-            //set quote date
-            labelDateTime.Text = datumList[0].last_updated.ToString();//rootObject.status.timestamp.ToString();
+            //context.Transactions.Local.ToBindingList()
+            ;
 
         }
-
-
+        private void buttonAddTransaction_Click(object sender, EventArgs e)
+        {
+            if (comboBoxSymbol.SelectedItem.ToString() != "Select Coin" && textBoxTransactionAmount.Text != "Amount of Units" && textBoxCost.Text != "Cost per Unit")
+            {
+                Console.WriteLine($"{comboBoxSymbol.SelectedItem} {textBoxTransactionAmount.Text} ${textBoxCost.Text}");
+                int maxTransactionId = (from transaction in context.Transactions
+                                       select transaction.transactionId).Max()+1;
+                int thisCoinId = (from coin in context.Coins
+                                 where coin.coinSymbol == comboBoxSymbol.SelectedItem.ToString()
+                                 select coin.coinId).First();
+                Transaction userTransaction = new Transaction
+                {
+                    transactionId = maxTransactionId,
+                    transactionCoinId = thisCoinId,
+                    transactionAmount = double.Parse(textBoxTransactionAmount.Text),
+                    transactionPorfolioId = 1,
+                    transactionPricePerCoin = double.Parse(textBoxCost.Text),
+                };
+                context.Transactions.Add(userTransaction);
+                context.SaveChanges();
+                dataGridViewPortfolio.Refresh();
+                DataGridViewPortfolioDataSource();
+            }
+            else
+            {
+                MessageBox.Show("Please enter all Coin, Amount, and Cost", "Enter all info");
+            }
+        }
     }
 }
