@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPortfolioRow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PortfolioRow>
+    <CoinId>1</CoinId>
+    <CoinSymbol>BTC</CoinSymbol>
+    <CoinName>Bitcoin</CoinName>
+    <TransactionAmount>3.14</TransactionAmount>
+    <TransactionPricePerCoin>1255.15</TransactionPricePerCoin>
+    <TransactionTotal>3941.1710000000003</TransactionTotal>
+  </PortfolioRow>
+  <PortfolioRow>
+    <CoinId>3020</CoinId>
+    <CoinSymbol>BHPC</CoinSymbol>
+    <CoinName>BHPCash</CoinName>
+    <TransactionAmount>12</TransactionAmount>
+    <TransactionPricePerCoin>34</TransactionPricePerCoin>
+    <TransactionTotal>408</TransactionTotal>
+  </PortfolioRow>
+</ArrayOfPortfolioRow>

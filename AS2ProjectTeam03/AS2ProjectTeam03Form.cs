@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -192,10 +193,10 @@ namespace AS2ProjectTeam03
             labelDateTime.Text = datumList[0].last_updated.ToString();//rootObject.status.timestamp.ToString();
 
         }
-        private void DataGridViewPortfolioDataSource()
+        private List<PortfolioRow> DataGridViewPortfolioDataSource()
         {
-            //seed initial data into datagridview
-            dataGridViewPortfolio.DataSource =
+            List<PortfolioRow> portfolioRowList = new List<PortfolioRow>();
+            portfolioRowList =
                 (from transaction in context.Transactions
                  join coin in context.Coins on transaction.transactionCoinId equals coin.coinId
                  select new PortfolioRow
@@ -208,8 +209,9 @@ namespace AS2ProjectTeam03
                      TransactionTotal = transaction.transactionAmount * transaction.transactionPricePerCoin
                  }).ToList();
             //context.Transactions.Local.ToBindingList()
-            ;
-
+            //seed initial data into datagridview
+            dataGridViewPortfolio.DataSource = portfolioRowList;
+            return portfolioRowList;
         }
         private void buttonAddTransaction_Click(object sender, EventArgs e)
         {
@@ -217,10 +219,10 @@ namespace AS2ProjectTeam03
             {
                 Console.WriteLine($"{comboBoxSymbol.SelectedItem} {textBoxTransactionAmount.Text} ${textBoxCost.Text}");
                 int maxTransactionId = (from transaction in context.Transactions
-                                       select transaction.transactionId).Max()+1;
+                                        select transaction.transactionId).Max() + 1;
                 int thisCoinId = (from coin in context.Coins
-                                 where coin.coinSymbol == comboBoxSymbol.SelectedItem.ToString()
-                                 select coin.coinId).First();
+                                  where coin.coinSymbol == comboBoxSymbol.SelectedItem.ToString()
+                                  select coin.coinId).First();
                 Transaction userTransaction = new Transaction
                 {
                     transactionId = maxTransactionId,
@@ -242,9 +244,13 @@ namespace AS2ProjectTeam03
 
         private void buttonExportPortfolio_Click(object sender, EventArgs e)
         {
-            JavaScriptSerializer exportJson = new JavaScriptSerializer();
-            var serializedString = exportJson.Serialize(context);
-            Console.WriteLine(serializedString);
+            List<PortfolioRow> portfolioRowList = DataGridViewPortfolioDataSource();
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<PortfolioRow>));
+            using (TextWriter writer = new StreamWriter(Path.GetFullPath(Application.StartupPath + "\\..\\..\\xmlExport.xml")))
+            {
+                xmlSerializer.Serialize(writer, portfolioRowList);
+            }
+            MessageBox.Show("Exported to the project folder as xmlExport.xml!", "Success");
         }
     }
 }
