@@ -252,8 +252,10 @@ namespace AS2ProjectTeam03
 
         private void checkBoxMaxSupply_CheckedChanged(object sender, EventArgs e)
         {
-            dataGridViewCoins.Refresh();
+            dataGridViewPortfolio.Refresh();
             DataGridViewPortfolioDataSource();
+            dataGridViewCoins.Refresh();
+            //SeedCoinData();
         }
     }
 }
