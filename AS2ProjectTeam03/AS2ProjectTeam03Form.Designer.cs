@@ -147,6 +147,7 @@
             this.buttonExportPortfolio.TabIndex = 7;
             this.buttonExportPortfolio.Text = "Export Portfolio";
             this.buttonExportPortfolio.UseVisualStyleBackColor = true;
+            this.buttonExportPortfolio.Click += new System.EventHandler(this.buttonExportPortfolio_Click);
             // 
             // buttonRestorePortfolio
             // 

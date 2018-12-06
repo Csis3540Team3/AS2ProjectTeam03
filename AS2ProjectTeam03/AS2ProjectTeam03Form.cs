@@ -239,5 +239,12 @@ namespace AS2ProjectTeam03
                 MessageBox.Show("Please enter all Coin, Amount, and Cost", "Enter all info");
             }
         }
+
+        private void buttonExportPortfolio_Click(object sender, EventArgs e)
+        {
+            JavaScriptSerializer exportJson = new JavaScriptSerializer();
+            var serializedString = exportJson.Serialize(context);
+            Console.WriteLine(serializedString);
+        }
     }
 }
